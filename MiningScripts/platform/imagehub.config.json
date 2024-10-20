@@ -1,0 +1,19 @@
+{
+    "Auth0:Audience": "${configuration_auth0_audience}$",
+    "Auth0:ClientId": "${configuration_aue_auth0_clientid}$",
+    "Auth0:Domain": "${configuration_auth0_domain}$",
+    "Azure:KeyVault:KeyVaultName": "${shared_keyvault_name}$",
+    "AzureB2C:Authority": "${b2c_authority}$",
+    "AzureB2C:ClientId": "${b2c_clientId}$",
+    "AzureB2C:Domain": "${b2c_domain}$",
+    "AzureB2C:Instance": "${b2c_instance}$",
+    "AzureB2C:SignUpSignInPolicyId": "${b2c_signUpSignInPolicyId}$",
+    "AzureB2C:TenantId": "${b2c_tenantId}$",
+    "AzureServicesConnectionString": "RunAs=App",
+    "DataProtection:KeyVaultName": "${shared_keyvault_name}$",
+    "DataProtection:StorageAccountName": "${shared_storage_account}$",
+    "EnableEnhancedLogging": "true",
+    "EnableSwagger": "${enable_swagger}$",
+    "Storages:CachedImage:AccountName": "${company_prefix}$${env_prefix}$${customer_prefix}$plt${location_prefix}$imagehub",
+    "Storages:OriginalImage:AccountName": "${company_prefix}$${env_prefix}$${customer_prefix}$plt${location_prefix}$imagehub"
+}

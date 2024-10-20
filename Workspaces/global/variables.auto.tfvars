@@ -1,0 +1,13 @@
+location                                   = "australiaeast"
+project                                    = "platform"
+project_prefix                             = "lda"
+company_prefix                             = "wil"
+state-resource-group-name                  = "t1-wil-plt-sbx-rsg-shr-aue"
+state-storage-account-name                 = "artifact2svf38tkep"
+state-storage-account-sas-token            = ""
+tier                                       = 2
+zone                                       = 1
+frontdoor_dns_name                         = "willowinc.com"
+frontdoor_probe_interval_in_seconds        = 300
+frontdoor_keyvault_certificate_secret_name = "willowinc-com"
+notification_emails                        = "service@contoso.com,support@contoso.com"

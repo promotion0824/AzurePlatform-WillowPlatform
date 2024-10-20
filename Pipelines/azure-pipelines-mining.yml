@@ -1,0 +1,122 @@
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    exclude:
+    - Workspaces/*
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+- name: WorkspaceLocation
+  value: MiningWorkspaces
+
+parameters:
+  - name: validateWorkspaces
+    type: object
+    default:
+      - name: customers
+      - name: global
+      - name: livedata
+      - name: platform
+      - name: shared
+
+steps:
+- checkout: self
+  persistCredentials: true
+  submodules: true
+  clean: true
+
+- template: ../build-templates/psscriptanalyzer-scan.yaml
+  parameters:
+    scriptDirectory: '$(Build.SourcesDirectory)/MiningScripts'
+
+- task: TerraformInstaller@0
+  inputs:
+    terraformVersion: '0.12.31'
+
+- ${{ each workspace in parameters.validateWorkspaces }}:
+  - task: TerraformTaskV2@2
+    displayName: '[Terraform] Init $(WorkspaceLocation)/${{ workspace.name }}'
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/$(WorkspaceLocation)/${{ workspace.name }}'
+      backendServiceArm: 'az-k8s-internal-environments'
+      backendAzureRmResourceGroupName: 'deployment-data'
+      backendAzureRmStorageAccountName: 'k8sintenvdeploydata'
+      backendAzureRmContainerName: 'terraform-state'
+      backendAzureRmKey: 'build/$(WorkspaceLocation)/${{ workspace.name }}.tfstate'
+
+  - task: TerraformTaskV2@2
+    displayName: '[Terraform] Validate $(WorkspaceLocation)/${{ workspace.name }}'
+    inputs:
+      provider: 'azurerm'
+      command: 'validate'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/$(WorkspaceLocation)/${{ workspace.name }}'
+
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: |
+        rm -rf $(WorkspaceLocation)/${{ workspace.name }}/.terraform
+    displayName: '[Bash] Cleanup .terraform'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'Scripts'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Scripts'
+  displayName: '[AzureDevops] Copy Scripts to artifact staging directory'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'MiningScripts'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/MiningScripts'
+  displayName: '[AzureDevops] Copy MiningScripts to artifact staging directory'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'MiningWorkspaces'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/MiningWorkspaces'
+  displayName: '[AzureDevops] Copy Workspaces to artifact staging directory'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'terraform-modules'
+    Contents: '**/?(*.tf|*.yaml|*.json|*.ps1|*.psm1|*.psd1|*.dll|*.xml)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/terraform-modules'
+  displayName: '[AzureDevops] Copy terraform-modules to artifact staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts'
+    ArtifactName: 'Scripts'
+    publishLocation: 'Container'
+  displayName: '[AzureDevops] Publish Scripts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/MiningScripts'
+    ArtifactName: 'MiningScripts'
+    publishLocation: 'Container'
+  displayName: '[AzureDevops] Publish MiningScripts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/MiningWorkspaces'
+    ArtifactName: 'MiningWorkspaces'
+    publishLocation: 'Container'
+  displayName: '[AzureDevops] Publish MiningWorkspaces'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-modules'
+    ArtifactName: 'terraform-modules'
+    publishLocation: 'Container'
+  displayName: '[AzureDevops] Publish terraform-modules'

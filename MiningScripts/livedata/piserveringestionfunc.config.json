@@ -1,0 +1,7 @@
+{
+    "SiteToPlatformEventHubConnectionString": "@Microsoft.KeyVault(SecretUri=https://${shared_keyvault_name}$.vault.azure.net/secrets/PIServerIngestionFunc--SiteToPlatformEventHubConnectionString/)",
+    "UnifiedEventHubConnectionString": "@Microsoft.KeyVault(SecretUri=https://${shared_keyvault_name}$.vault.azure.net/secrets/PIServerIngestionFunc--UnifiedEventHubConnectionString/)",
+    "UnifiedEventHubName": "ingestion-to-adx",
+    "PoisonQueueName": "poison-queue",
+    "ConnectorId": "2f9d1c20-e5a0-4175-a7df-59a3b6d311c2"
+}

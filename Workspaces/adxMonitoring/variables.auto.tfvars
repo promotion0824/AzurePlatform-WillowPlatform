@@ -1,0 +1,14 @@
+location                          = "australiaeast"
+project                           = "platform"
+project_prefix                    = "lda"
+customer_prefix                   = "cu1"
+state-resource-group-name         = "t1-wil-plt-sbx-rsg-shr-aue"
+state-storage-account-name        = "artifact2svf38tkep"
+state-storage-account-sas-token   = ""
+tier                              = 3
+zone                              = 1
+adx_configuration_version         = "0.1"
+alerts_enabled                    = true
+adx_notification_teams_channel    = "https://ridleyco.webhook.office.com/webhookb2/87bb8b2a-4312-46c8-aeba-9f8207fcb765@d43166d1-c2a1-4f26-a213-f620dba13ab8/IncomingWebhook/cee164322f774cd485de95103a9b7ddf/42509b61-283f-4b2c-96c8-08c6a2328394"
+adx_log_analytics_workspace       = "adxlogs"
+adx_notification_email            = "nsmoorthy@willowinc.com"

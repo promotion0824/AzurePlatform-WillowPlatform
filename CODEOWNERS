@@ -1,0 +1,9 @@
+*                                               @WillowInc/mining-application-maintainers @WillowInc/iot-services-maintainers
+/MiningScripts/                                 @WillowInc/mining-application-maintainers
+/MiningWorkspaces/                              @WillowInc/mining-application-maintainers
+/Pipelines/azure-pipelines-mining.yml           @WillowInc/mining-application-maintainers
+/Workspaces/adx/                                @WillowInc/iot-services-maintainers
+/Workspaces/adxMonitoring/                      @WillowInc/iot-services-maintainers
+/Workspaces/IoTServices/                        @WillowInc/iot-services-maintainers
+/Workspaces/livedata/                           @WillowInc/iot-services-maintainers
+/Workspaces/customers/                          @WillowInc/iot-services-maintainers

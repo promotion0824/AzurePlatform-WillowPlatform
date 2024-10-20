@@ -1,0 +1,17 @@
+location                         = "australiaeast"
+project                          = "platform"
+project_prefix                   = "alm"
+state-resource-group-name        = "t1-wil-plt-sbx-rsg-shr-aue"
+state-storage-account-name       = "artifact2svf38tkep"
+state-storage-account-sas-token  = ""
+tier                             = 3
+zone                             = 1
+storage_account_tier             = "Standard"
+storage_account_replication_type = "LRS"
+app_service_enable_autoscale     = false
+app_service_plan_kind            = "FunctionApp"
+app_service_plan_sku_tier        = "Dynamic"
+app_service_plan_sku_size        = "Y1"
+function_app_names               = ["healthcheck"]
+function_app_version             = "~3"
+deploy_function_app              = false

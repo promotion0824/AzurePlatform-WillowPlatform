@@ -1,0 +1,59 @@
+trigger:
+  branches:
+    include:
+    - master
+    - develop
+  paths:
+    exclude:
+    - MiningWorkspaces/*
+    
+pool:
+  vmImage: 'Ubuntu-latest'
+
+steps:
+- checkout: self
+  persistCredentials: true
+  submodules: true
+  clean: true
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'Scripts'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Scripts'
+  displayName: 'copy Scripts to artifact staging directory'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'Workspaces'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/Workspaces'
+  displayName: 'copy Workspaces to artifact staging directory'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: 'terraform-modules'
+    Contents: '**/?(*.tf|*.yaml|*.json|*.ps1|*.psm1|*.psd1|*.dll|*.xml)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/terraform-modules'
+  displayName: 'copy terraform-modules to artifact staging directory'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Scripts'
+    ArtifactName: 'Scripts'
+    publishLocation: 'Container'
+  displayName: 'publish Scripts'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/Workspaces'
+    ArtifactName: 'Workspaces'
+    publishLocation: 'Container'
+  displayName: 'publish Workspaces'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/terraform-modules'
+    ArtifactName: 'terraform-modules'
+    publishLocation: 'Container'
+  displayName: 'publish terraform-modules'

@@ -1,0 +1,14 @@
+location                         = "australiaeast"
+project                          = "platform"
+project_prefix                   = "lda"
+tier                             = 2
+zone                             = 1
+key_vault_sku_name               = "standard"
+storage_account_tier             = "Standard"
+storage_account_replication_type = "LRS"
+storage_account_create_container = true
+storage_account_container_name   = "dataprotectionkeys"
+oms_sku                          = "Standalone"
+notification_emails              = "service@contoso.com,support@contoso.com"
+alerts_enabled                   = false
+eventhub_sku                     = "Basic"

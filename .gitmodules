@@ -1,0 +1,4 @@
+[submodule "terraform-modules"]
+	path = terraform-modules
+	url = https://github.com/WillowInc/AzurePlatform-terraform-modules
+    branch = master

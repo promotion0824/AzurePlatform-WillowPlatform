@@ -1,0 +1,4 @@
+{
+    "${customerId}$:ADX:ClusterUri": "${adx_cluster_uri}$",
+    "${customerId}$:ADX:Database": "${adx_database_name}$"
+}

@@ -1,0 +1,1 @@
+digital_twin_name = "wil-uat-lda-cu1-aue1-adt-test"

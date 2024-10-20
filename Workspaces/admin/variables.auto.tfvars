@@ -1,0 +1,13 @@
+location                        = "australiaeast"
+project                         = "platform"
+project_prefix                  = "adm"
+state-resource-group-name       = "t1-wil-plt-sbx-rsg-shr-aue"
+state-storage-account-name      = "artifact2svf38tkep"
+state-storage-account-sas-token = ""
+tier                            = 3
+zone                            = 1
+app_service_plan_sku_tier       = "Standard"
+app_service_plan_sku_size       = "S1"
+app_service_enable_autoscale    = false
+web_app_names                   = ["adminportalxl", "adminportalweb"]
+notification_emails             = "service@contoso.com,support@contoso.com"

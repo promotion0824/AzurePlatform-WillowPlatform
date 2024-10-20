@@ -1,0 +1,22 @@
+parameters:
+  - name: scriptDirectory
+    type: string
+
+steps:
+- task: PowerShell@2
+  displayName: '[Powershell] Install ScriptAnalyzer'
+  inputs:
+    targetType: inline
+    pwsh: true
+    script: |
+      Install-Module -Name 'PSScriptAnalyzer' -Scope 'CurrentUser' -Force
+
+- task: PowerShell@2
+  displayName: '[Powershell][ScriptAnalyzer] Analyze and post PR Comment'
+  env:
+      SYSTEM_ACCESSTOKEN: $(System.AccessToken)
+  inputs:
+    targetType: filePath
+    pwsh: true
+    arguments: -ScriptDirectory ${{ parameters.scriptDirectory }}
+    filePath: $(Build.SourcesDirectory)/build-templates/Start-PSScriptAnalyzer.ps1

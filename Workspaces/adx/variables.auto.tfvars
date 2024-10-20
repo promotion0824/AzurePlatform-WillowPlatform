@@ -1,0 +1,14 @@
+location                          = "australiaeast"
+project                           = "platform"
+project_prefix                    = "lda"
+customer_prefix                   = "cu1"
+state-resource-group-name         = "t1-wil-plt-sbx-rsg-shr-aue"
+state-storage-account-name        = "artifact2svf38tkep"
+state-storage-account-sas-token   = ""
+tier                              = 3
+zone                              = 1
+function_app_names                = ["adaptortouie"]
+eventhub_message_retention        = 7
+deploy_function_app               = true
+adx_configuration_version         = "0.1"
+eventhub_capture_enable           = false

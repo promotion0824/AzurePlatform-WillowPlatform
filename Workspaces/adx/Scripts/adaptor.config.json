@@ -1,0 +1,17 @@
+{
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "FUNCTIONS_EXTENSION_VERSION": "~4",
+    "AzureWebJobs.ExternalEventHubAdaptor.Disabled": "${skip_external_events}$",
+    "AzureWebJobs.MappedAdaptor.Disabled": "false",
+    "MappedSourceConsumerGroup": "mapped-adaptor",
+    "MappedSourceEventHub__fullyQualifiedNamespace": "${TF_external_event_hub_namespace_name}$.servicebus.windows.net",
+    "MappedSourceEventHubName": "mapped",
+    "PoisonQueue": "webjobs-adaptor-poison",
+    "SourceConsumerGroup": "iotadaptor",
+    "SourceIoTHub": "@Microsoft.KeyVault(SecretUri=https://${shared_keyvault_name}$.vault.azure.net/secrets/WillowCommon--${customerId}$--IotHubEndPoint/)",
+    "SourceExternalEventHubConsumerGroup": "external-events-adaptor",
+    "SourceExternalEventHubName": "input-to-lda",
+    "SourceExternalEventHubEndpoint": "@Microsoft.KeyVault(SecretUri=https://${shared_keyvault_name}$.vault.azure.net/secrets/WillowCommon--${customerId}$--SourceExternalEventHubEndpoint/)",
+    "UnifiedEventHubName": "ingestion-to-adx",
+    "UnifiedEventHub__fullyQualifiedNamespace": "${TF_unified_event_hub_namespace_name}$.servicebus.windows.net"
+}

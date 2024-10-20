@@ -1,0 +1,7 @@
+location                        = "${location}$"
+project                         = "${project}$"
+customer_prefix                 = "${customer_prefix}$"
+release_id                      = "${release_id}$"
+release_url                     = "${release_url}$"
+tier                            = "${tier}$"
+zone                            = "${zone}$"
